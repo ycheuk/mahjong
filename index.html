@@ -10,15 +10,16 @@
 
     #game-board {
       display: grid;
-      grid-template-columns: repeat(3, 100px);
+      grid-template-columns: repeat(4, 100px);
     }
 
     .card {
-      width: 100px;
-      height: 100px;
+      width: 102px;
+      height: 175px;
       background: url("back.png");
       background-size: cover;
       cursor: pointer;
+      transform: scale(0.8);
     }
   </style>
 </head>
@@ -87,9 +88,10 @@
     }
 
     function shuffle(array) {
-      /*for () {
-        const j = Math.floor(Math.random());
-      } */
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
       return array;
     }
 
