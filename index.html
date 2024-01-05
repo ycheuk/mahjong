@@ -5,7 +5,8 @@
   <title>Mahjong</title>
   <style>
     body {
-      align-items: center;
+      align-items: flex;
+      background-color: #ece6e3;
     }
 
     #game-board {
@@ -14,12 +15,18 @@
     }
 
     .card {
-      width: 102px;
-      height: 175px;
+      width: 103px;
+      height: 173px;
       background: url("back.png");
-      background-size: cover;
+      background-size: contain;
+      background-repeat: no-repeat;
       cursor: pointer;
       transform: scale(0.8);
+    }
+
+    .card[data-image]:not([data-image="back"]) {
+      background-size: contain;
+      background-repeat: no-repeat;
     }
   </style>
 </head>
@@ -27,7 +34,7 @@
   <div id="game-board"></div>
   <button onclick="resetGame()">Play Again</button>
   <script>
-    const cardImages = ["kazuha.png", "lyney.png", "nahida.png", "raiden.png", "wanderer.png", "xiao.png"];
+    const cardImages = ["kazuha", "cyno", "nahida", "raiden", "wanderer", "xiao"];
     const gameBoard = document.getElementById("game-board");
     let selectedCards = []; // keep track which cards were selected
     let matchedPairs = 0; // to track when game ends
@@ -54,7 +61,7 @@
     function flipCard(card) {
       if (selectedCards.length < 2) {
         selectedCards.push(card); // adds card to selectedCards using push()
-        card.style.backgroundImage = `url("${card.dataset.image}")`;
+        card.style.backgroundImage = `url("${card.dataset.image}.png")`;
       }
 
       if (selectedCards.length === 2) {
@@ -76,6 +83,9 @@
         if (matchedPairs === cardImages.length) {
           alert("Congratulations");
         }
+
+        card1.style.backgroundImage = `url("${card1.dataset.image}.gif")`;
+        card2.style.backgroundImage = `url("${card2.dataset.image}.gif")`;
       }
 
       else {
